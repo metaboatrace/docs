@@ -10,7 +10,7 @@
 | ---- | ---- |
 | [models](https://github.com/metaboatrace/models) | サービス横断で利用するエンティティのPythonパッケージ |
 | [scrapers](https://github.com/metaboatrace/scrapers) | ボートレース関連のWebサイトのスクレイピング用Pythonパッケージ |
-| [Crawler](https://github.com/metaboatrace/crawlers) | スクレイピングからデータの永続化までを行うリポジトリ |
+| [Crawlers](https://github.com/metaboatrace/crawlers) | スクレイピングからデータの永続化までを行うリポジトリ |
 | ML（非公開） | 機械学習のためのデータ処理やクレンジング・モデルの生成などを行うリポジトリ |
 
 ## 用語定義
@@ -20,3 +20,7 @@
 | 用語 | 説明 |
 | ---- | ---- |
 | **OriginData** | 公式サイトからスクレイピングした原始的なデータ |
+
+## 運用
+
+[OriginData の収集](./operations/crawl_origin_data.md)
