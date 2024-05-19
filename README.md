@@ -20,7 +20,9 @@
 | 用語 | 説明 |
 | ---- | ---- |
 | **OriginData** | 公式サイトからスクレイピングした原始的なデータ |
+| **DataPackage** | OriginData をベースにレースの全情報を包括的にまとめて、ワンパッケージにしたデータ |
 
 ## 運用
 
-[OriginData の収集](./operations/crawl_origin_data.md)
+- [OriginData の収集](./operations/crawl_origin_data.md)
+- [DataPackage の生成](./operations/create_data_package.md)
