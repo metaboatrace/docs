@@ -1,12 +1,32 @@
+## スキーマの生成
+
+※ 以下、 [Crawlers](https://github.com/metaboatrace/crawlers) リポジトリで作業を行うものとする
+
+OriginDataの永続化はRDBにて行われている。
+
+### データベースの作成
+
+```bash
+$ psql "postgresql://postgres:password@127.0.0.1:55432"
+postgres=# create database metaboatrace_development;
+```
+
+### テーブルの作成
+
+環境変数 `DATABASE_URL` を設定し、以下をそれぞれ実行する。
+
+```bash
+$ python scripts/initialize_or_update_db.py
+$ python scripts/initialize_master_data.py
+```
+
 ## 公式サイトをクロール
 
-[Crawlers](https://github.com/metaboatrace/crawlers) リポジトリにて以下のスクリプトを実行する。
+以下を実行することで指定した期間のすべてのデータを収集できる。
 
 ```bash
 $ python scripts/crawl_data_for_period.py 2022-05-01 2022-05-10
 ```
-
-これで、指定した期間のすべてのデータを収集できる。
 
 ## データの管理
 
@@ -15,7 +35,7 @@ $ python scripts/crawl_data_for_period.py 2022-05-01 2022-05-10
 #### レースデータの管理
 
 収拾したデータは、レーサーの級別審査期間単位で管理する。  
-Crawler リポジトリにて、以下のスクリプトを実行すると対象の期以外のデータを削除した上でアーカイブファイルが出力される。
+以下のスクリプトを実行すると対象の期以外のデータを削除した上でアーカイブファイルが出力される。
 
 ```bash
 $ python scripts/trim_data_for_specified_term.py 2021 1
