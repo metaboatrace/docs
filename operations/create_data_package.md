@@ -61,19 +61,52 @@ $ python scripts/aggregate_racer_data_by_period.py 2020 2 1 placement
 
 本節で生成したCSVは、以降「集計済みCSV」と表記する。
 
+### DataPackageSource の生成
+
+集計済みCSVを `DataPackage` の生成に用いる。  
+ただし、集計済みCSVは期単位でファイルが分かれているため、 `DataPackage` の生成に用いる際にはファイルをまとめておく必要がある。
+
+以下のようにスクリプトを実行すれば、ファイルをまとめることができる。
+
+```bash
+$ python scripts/create_data_package_sources.py --year 2021 --period_type 2 --terms_count_stadium 3 --terms_count_racer 2
+Stadium terms to be merged:
+2021_1
+2020_2
+2020_1
+
+Racer terms to be merged:
+2021_1
+2020_2
+
+Do you want to proceed with these terms? (yes/no): yes
+```
+
+まとめられたファイルは以下のように配置される。
+
+```
+data/suite/{year}/{period_type}/
+  racer_winning_trick.csv
+  racer_st.csv
+  racer_elative_performance_metrics.csv
+  racer_placement.csv
+  stadium_winning_trick.csv
+```
+
+これらは、 `DataPackage` の生成に利用されるため、 `DataPackageSource` と名付ける。
+
 ### 生成スクリプトの実行
 
-前節で生成した集計済みCSVのパスを、 `scripts/generate_race_data_package.py` にて指定する。  
-※ ハードコードせずに動的に指定できるように改善予定
+前節で生成した `DataPackageSource` のパスは、 `scripts/generate_race_data_package.py` にて規約で識別されるようになっている。
 
-その後、以下のように実行する。
+規約に則ったパスに　`DataPackageSource` が配置できているなら、以下のように期間を指定して　`DataPackage` を作成できる。
 
 ```bash
 $ python scripts/generate_race_data_package.py 2021-11-01 2021-11-30
 ```
 
-引数で指定した期間の全レースで、 DataPackage の生成が実行される。  
-リーク防止のため、これより時系列的に前のデータを含む集計済みCSVを使用しないように注意すること。
+リーク防止のため、これより時系列的に前のデータを含む集計済みCSVを使用しないように注意すること。　　
+`data/suite/{year}/{period_type}/` に `DataPackageSource` を作成した場合は、その直下にある `merge_log.txt` というファイルにどの集計済みCSVをマージしたかが記録されている。
 
 日別に生成されたCSVは、以下のユーティリティスクリプトの実行により統合が行える。
 
