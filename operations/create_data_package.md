@@ -108,8 +108,9 @@ $ python scripts/generate_race_data_package.py 2021-11-01 2021-11-30
 リーク防止のため、これより時系列的に前のデータを含む集計済みCSVを使用しないように注意すること。　　
 `data/suite/{year}/{period_type}/` に `DataPackageSource` を作成した場合は、その直下にある `merge_log.txt` というファイルにどの集計済みCSVをマージしたかが記録されている。
 
-日別に生成されたCSVは、以下のユーティリティスクリプトの実行により統合が行える。
+日別に生成されたCSVは、以下のユーティリティスクリプトの実行により期別に統合が行える。
 
 ```bash
-$ python scripts/combined_csvs.py -d data/package/ 
+$ python scripts/combine_data_packages.py 2021 2                    
+Combined data saved to data/tmp/packages/2021_2.csv
 ```
