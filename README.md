@@ -35,4 +35,5 @@
 
 ### モデルの訓練と評価
 
-- [モデルの訓練](./operations/train_model.md)
+- [モデルの訓練](./operations/train_models.md)
+- [モデルの評価](./operations/evalualte_models.md)
