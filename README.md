@@ -27,6 +27,12 @@
 
 ## 運用
 
+### データセットの生成
+
 - [OriginData の収集](./operations/crawl_origin_data.md)
 - [DataPackage の生成](./operations/create_data_package.md)
 - [PreparedData の生成](./operations/create_prepared_data.md)
+
+### モデルの訓練と評価
+
+- [モデルの訓練](./operations/train_model.md)
