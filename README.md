@@ -20,6 +20,8 @@
 | 用語 | 説明 |
 | ---- | ---- |
 | **OriginData** | 公式サイトからスクレイピングした原始的なデータ |
+| **DataPackageSource** | OriginData をもとに集計したレーサーやレース場の統計データをまとめたもの |
+| **DataPackageSourceSuite** | DataPackage　を作成するために必要な DataPackageSource の一式 |
 | **DataPackage** | OriginData をベースにレースの全情報を包括的にまとめて、ワンパッケージにしたデータ |
 | **PreparedData** | DataPackageを前処理して、モデルの学習や予測に使えるように整えたデータ |
 
