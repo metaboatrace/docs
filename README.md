@@ -10,8 +10,11 @@
 | ---- | ---- |
 | [models](https://github.com/metaboatrace/models) | サービス横断で利用するエンティティのPythonパッケージ |
 | [scrapers](https://github.com/metaboatrace/scrapers) | ボートレース関連のWebサイトのスクレイピング用Pythonパッケージ |
-| [Crawlers](https://github.com/metaboatrace/crawlers) | スクレイピングからデータの永続化までを行うリポジトリ |
-| ML（非公開） | 機械学習のためのデータ処理やクレンジング・モデルの生成などを行うリポジトリ |
+| [Crawlers](https://github.com/metaboatrace/crawlers) | スクレイピングからデータの永続化までを行うサービス (OriginData を生成) |
+| [Aggregator](https://github.com/metaboatrace/aggregator) | 集計を行うサービス (AggregatedData を生成) |
+| ML（非公開） | 機械学習のためのデータクレンジングからモデルの学習や評価までを行うサービス |
+
+※ パッケージは小文字で、サービスは大文字でそれぞれ表記
 
 ## 用語定義
 
@@ -19,8 +22,9 @@
 
 | 用語 | 説明 |
 | ---- | ---- |
-| **OriginData** | 公式サイトからスクレイピングした原始的なデータ |
-| **DataPackageSource** | OriginData をもとに集計したレーサーやレース場の統計データをまとめたもの |
+| **OriginData** | 公式サイトなどからスクレイピングした原始的なデータ |
+| **AggregatedData** | OriginData をもとに作成されるレーサーやレース場の集計データ |
+| **DataPackageSource** | 指定した期間分 AggregatedData をまとめたもの |
 | **DataPackageSourceSuite** | DataPackage　を作成するために必要な DataPackageSource の一式 |
 | **DataPackage** | OriginData をベースにレースの全情報を包括的にまとめて、ワンパッケージにしたデータ |
 | **PreparedData** | DataPackageを前処理して、モデルの学習や予測に使えるように整えたデータ |
