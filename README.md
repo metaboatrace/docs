@@ -13,8 +13,10 @@
 | [Crawlers](https://github.com/metaboatrace/crawlers) | スクレイピングからデータの永続化までを行うサービス (OriginData を生成) |
 | [Aggregator](https://github.com/metaboatrace/aggregator) | 集計を行うサービス (AggregatedData を生成) |
 | ML（非公開） | 機械学習のためのデータクレンジングからモデルの学習や評価までを行うサービス |
+| [infra](https://github.com/metaboatrace/infra) | インフラリソースを一元的に IaC で管理するためのリポジトリ |
 
-※ パッケージは小文字で、サービスは大文字でそれぞれ表記
+※ サービスは頭文字を大文字で表記  
+※ 各リポジトリのREADMEにはローカル開発環境の構築方法を記載し、それ以上の詳細はこのリポジトリで管理
 
 ## 用語定義
 
