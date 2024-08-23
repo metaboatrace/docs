@@ -43,3 +43,7 @@
 
 - [モデルの訓練](./operations/train_models.md)
 - [モデルの評価](./operations/evalualte_models.md)
+
+## Tips
+
+- [ECSコンテナにアクセスする](./guides/ecs-exec.md)
