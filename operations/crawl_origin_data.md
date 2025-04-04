@@ -4,13 +4,6 @@
 
 OriginDataの永続化はRDBにて行われている。
 
-### データベースの作成
-
-```bash
-$ psql "postgresql://postgres:password@127.0.0.1:55432"
-postgres=# create database metaboatrace_development;
-```
-
 ### テーブルの作成
 
 環境変数 `DATABASE_URL` を設定し、以下をそれぞれ実行する。
@@ -19,6 +12,8 @@ postgres=# create database metaboatrace_development;
 $ python scripts/initialize_or_update_db.py
 $ python scripts/initialize_master_data.py
 ```
+
+`psql "postgresql://postgres:password@127.0.0.1:55432/metaboatrace_development"` を実行し、スキーマが作成されているかやデータが入っているかを確認する。
 
 ## 公式サイトをクロール
 
