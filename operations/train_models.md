@@ -3,6 +3,7 @@
 ### 前提条件
 
 - PreparedData がすでに用意できていること
+- `brew install libomp` などで LightGBM が内部的に必要とする libomp.dylib (OpenMP ライブラリ) がインストールされていること
 
 ### モデルの生成
 
