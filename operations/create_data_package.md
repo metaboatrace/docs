@@ -2,8 +2,10 @@
 
 ※ 以下、 MLリポジトリで作業を行うものとする
 
-**DataPackage は下位互換性を常に保つものとする**  
-※ 全モデルから利用されるものであるため
+**※ DataPackage は下位互換性を常に保つものとする**  
+　※ 全モデルから利用されるものであるため
+
+※ コマンド実行前に `source .venv/bin/activate` などで仮想環境のアクティーベーションを済ませてあるものとする
 
 ## DataPackage の生成手順
 
@@ -34,7 +36,7 @@ DataPackage を生成する際には複数の期を横断した集計結果が�
 以下のように、起点とする期から**過去**何期分集計するかを引数で指定して実行する。
 
 ```bash
-$ python scripts/aggregate_stadium_data_by_period.py 2022 2 6
+$ PYTHONPATH=.:$PYTHONPATH python scripts/aggregate_stadium_data_by_period.py 2022 2 6
 ```
 
 上記では、以下のように6期分CSVファイルが生成される。
@@ -56,7 +58,7 @@ $ ls -l data/aggregation/stadium/
 レーサーの場合も基本的には前項と同様だが、集計対象のデータ種別が4種あるため、第4引数でデータ種別を指定する必要がある。
 
 ```
-$ python scripts/aggregate_racer_data_by_period.py 2020 2 1 placement
+$ PYTHONPATH=.:$PYTHONPATH python scripts/aggregate_racer_data_by_period.py 2020 2 1 placement
 ```
 
 上記は着順データの集計を行う例だが、"all" を指定することで全種同時に集計することが可能である。
@@ -71,7 +73,7 @@ $ python scripts/aggregate_racer_data_by_period.py 2020 2 1 placement
 以下のようにスクリプトを実行すれば、ファイルをまとめることができる。
 
 ```bash
-$ python scripts/create_data_package_sources.py --year 2021 --period_type 2 --terms_count_stadium 3 --terms_count_racer 2
+$ PYTHONPATH=.:$PYTHONPATH python scripts/create_data_package_sources.py --year 2021 --period_type 2 --terms_count_stadium 3 --terms_count_racer 2
 Stadium terms to be merged:
 2021_1
 2020_2
@@ -104,15 +106,17 @@ data/suite/{year}/{period_type}/
 規約に則ったパスに　`DataPackageSource` が配置できているなら、以下のように期間を指定して　`DataPackage` を作成できる。
 
 ```bash
-$ python scripts/generate_race_data_package.py 2021-11-01 2021-11-30
+$ PYTHONPATH=.:$PYTHONPATH python scripts/generate_race_data_package.py 2021-11-01 2021-11-30
 ```
 
-リーク防止のため、これより時系列的に前のデータを含む集計済みCSVを使用しないように注意すること。　　
+リーク防止のため、これより時系列的に後のデータを含む集計済みCSVを使用しないように注意すること[^1]。　　
 `data/suite/{year}/{period_type}/` に `DataPackageSource` を作成した場合は、その直下にある `merge_log.txt` というファイルにどの集計済みCSVをマージしたかが記録されている。
 
 日別に生成されたCSVは、以下のユーティリティスクリプトの実行により期別に統合が行える。
 
 ```bash
-$ python scripts/combine_data_packages.py 2021 2                    
+$ PYTHONPATH=.:$PYTHONPATH python scripts/combine_data_packages.py 2021 2                    
 Combined data saved to data/tmp/packages/2021_2.csv
 ```
+
+[^1]: 例えば、2023年後期の期初から1ヶ月分のデータを作るなら `python scripts/generate_race_data_package.py 2023-11-01 2023-11-30` のようなコマンドになるが、算入する集計済みCSVに2023年後期以降のデータを含んでいたらリークになる
