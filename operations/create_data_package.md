@@ -63,12 +63,12 @@ $ PYTHONPATH=.:$PYTHONPATH python scripts/aggregate_racer_data_by_period.py 2020
 
 上記は着順データの集計を行う例だが、"all" を指定することで全種同時に集計することが可能である。
 
-本節で生成したCSVは、以降「集計済みCSV」と表記する。
+本節で生成したCSVは、以降 **AggregatedData** と表記する。
 
 ### DataPackageSource の生成
 
-集計済みCSVを `DataPackage` の生成に用いる。  
-ただし、集計済みCSVは期単位でファイルが分かれているため、 `DataPackage` の生成に用いる際にはファイルをまとめておく必要がある。
+AggregatedData を `DataPackage` の生成に用いる。  
+ただし、AggregatedData は期単位でファイルが分かれているため、 `DataPackage` の生成に用いる際にはファイルをまとめておく必要がある。
 
 以下のようにスクリプトを実行すれば、ファイルをまとめることができる。
 
@@ -109,8 +109,8 @@ data/suite/{year}/{period_type}/
 $ PYTHONPATH=.:$PYTHONPATH python scripts/generate_race_data_package.py 2021-11-01 2021-11-30
 ```
 
-リーク防止のため、これより時系列的に後のデータを含む集計済みCSVを使用しないように注意すること[^1]。　　
-`data/suite/{year}/{period_type}/` に `DataPackageSource` を作成した場合は、その直下にある `merge_log.txt` というファイルにどの集計済みCSVをマージしたかが記録されている。
+リーク防止のため、これより時系列的に後のデータを含む AggregatedData を使用しないように注意すること[^1]。　　
+`data/suite/{year}/{period_type}/` に `DataPackageSource` を作成した場合は、その直下にある `merge_log.txt` というファイルにどの AggregatedData をマージしたかが記録されている。
 
 日別に生成されたCSVは、以下のユーティリティスクリプトの実行により期別に統合が行える。
 
@@ -119,4 +119,4 @@ $ PYTHONPATH=.:$PYTHONPATH python scripts/combine_data_packages.py 2021 2
 Combined data saved to data/tmp/packages/2021_2.csv
 ```
 
-[^1]: 例えば、2023年後期の期初から1ヶ月分のデータを作るなら `python scripts/generate_race_data_package.py 2023-11-01 2023-11-30` のようなコマンドになるが、算入する集計済みCSVに2023年後期以降のデータを含んでいたらリークになる
+[^1]: 例えば、2023年後期の期初から1ヶ月分のデータを作るなら `python scripts/generate_race_data_package.py 2023-11-01 2023-11-30` のようなコマンドになるが、算入する AggregatedData に2023年後期以降のデータを含んでいたらリークになる
