@@ -1,17 +1,18 @@
 ## DataPackage の生成手順
 
-※ 以下、 MLリポジトリで作業を行うものとする
+※ 以下、 MLリポジトリで作業を行うものとする  
+※ コマンド実行前に `source .venv/bin/activate` などで仮想環境のアクティーベーションを済ませてあるものとする
 
 ### 前提条件
 
-- 期単位でまとめられた DataPackage が存在すること
+- 対象の期の DataPackageSource が存在すること
 
 ### CSVの生成
 
 以下のようにスクリプトを実行すればインタラクティブにどの期の DataPackage をもとにするかや、どのモデルを対象に前処理をするかを選択できる。
 
 ```bash
-$ python scripts/preparing.py
+$ PYTHONPATH=.:$PYTHONPATH python scripts/preparing.py
 [?] Select file(s) to preprocess: 
    [X] 2021_2.csv
  > [X] 2022_1.csv
