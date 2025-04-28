@@ -1,15 +1,15 @@
-## DataPackage の管理ポリシー
+## DataPackage の生成
 
-※ 以下、 MLリポジトリで作業を行うものとする
-
-**※ DataPackage は下位互換性を常に保つものとする**  
-　※ 全モデルから利用されるものであるため
-
+※ 以下、 MLリポジトリで作業を行うものとする  
 ※ コマンド実行前に `source .venv/bin/activate` などで仮想環境のアクティーベーションを済ませてあるものとする
 
-## DataPackage の生成手順
+### DataPackage の管理ポリシー
 
-### 期別集計データの準備
+DataPackage は全モデルから利用されるものであるため、**下位互換性を常に保つものとする**  
+
+### DataPackage の生成手順
+
+#### 期別集計データの準備
 
 以下の集計データを事前に準備しておく。
 
@@ -28,7 +28,7 @@
 DataPackage を生成する際には複数の期を横断した集計結果が必要になるが、その場合は集計ファイルをマージしたものを用いる。  
 これに関しては後述する。
 
-#### ボートレース場に関するデータの集計
+##### ボートレース場に関するデータの集計
 
 すでに集計対象の機関において OriginData が収集済みであることが前提である。  
 （後続のレーサーの項でも同様とする）
@@ -53,7 +53,7 @@ $ ls -l data/aggregation/stadium/
 
 ⚠️ 指定した2022年の後期から6期分先ではなく、過去6期分が集計されるので注意
 
-#### レーサーに関するデータの集計
+##### レーサーに関するデータの集計
 
 レーサーの場合も基本的には前項と同様だが、集計対象のデータ種別が4種あるため、第4引数でデータ種別を指定する必要がある。
 
@@ -65,7 +65,7 @@ $ PYTHONPATH=.:$PYTHONPATH python scripts/aggregate_racer_data_by_period.py 2020
 
 本節で生成したCSVは、以降 **AggregatedData** と表記する。
 
-### DataPackageSource の生成
+#### DataPackageSource の生成
 
 AggregatedData を `DataPackage` の生成に用いる。  
 ただし、AggregatedData は期単位でファイルが分かれているため、 `DataPackage` の生成に用いる際にはファイルをまとめておく必要がある。
@@ -99,7 +99,7 @@ data/suite/{year}/{period_type}/
 
 これらは、 `DataPackage` の生成に利用されるため、 `DataPackageSource` と名付ける。
 
-### 生成スクリプトの実行
+#### 生成スクリプトの実行
 
 前節で生成した `DataPackageSource` のパスは、 `scripts/generate_race_data_package.py` にて規約で識別されるようになっている。
 
