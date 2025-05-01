@@ -1,4 +1,4 @@
-## DataPackage の生成手順
+## PreparedData の生成手順
 
 ※ 以下、 MLリポジトリで作業を行うものとする  
 ※ コマンド実行前に `source .venv/bin/activate` などで仮想環境のアクティーベーションを済ませてあるものとする
