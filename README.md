@@ -36,6 +36,7 @@
 ### データセットの生成
 
 - [OriginData の収集](./operations/crawl_origin_data.md)
+- [AggregatedData の生成](./operations/create_aggregated_data.md)
 - [DataPackage の生成](./operations/create_data_package.md)
 - [PreparedData の生成](./operations/create_prepared_data.md)
 
