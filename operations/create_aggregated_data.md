@@ -25,10 +25,9 @@ AggregatedData は以下のデータを期別集計したものである
 すでに集計対象の機関において OriginData が収集済みであることが前提である。  
 （後続のレーサーの項でも同様とする）
 
-以下のように、起点とする期から**過去**何期分集計するかを引数で指定して実行する。
 
 ```bash
-$ PYTHONPATH=.:$PYTHONPATH python scripts/aggregate_stadium_data_by_period.py 2022 2 6
+$ PYTHONPATH=.:$PYTHONPATH python scripts/aggregate_stadium_data_by_period.py --year 2022 --period 2 --terms 6
 ```
 
 上記では、以下のように6期分CSVファイルが生成される。
@@ -50,7 +49,7 @@ $ ls -l data/aggregation/stadium/
 レーサーの場合も基本的には前項と同様だが、集計対象のデータ種別が4種あるため、第4引数でデータ種別を指定する必要がある。
 
 ```
-$ PYTHONPATH=.:$PYTHONPATH python scripts/aggregate_racer_data_by_period.py 2020 2 1 placement
+$ PYTHONPATH=.:$PYTHONPATH python scripts/aggregate_racer_data_by_period.py --year 2020 --period 2 --periods 1 --type all
 ```
 
-上記は着順データの集計を行う例だが、"all" を指定することで全種同時に集計することが可能である。
+type に "all" を指定することで全種同時に集計することが可能である。
