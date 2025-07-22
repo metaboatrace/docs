@@ -5,7 +5,16 @@
 
 ### 前提条件
 
-- 対象の期の DataPackageSource が存在すること
+- 対象の期の DataPackage が存在すること
+
+### DataPackage の統合
+
+`PreparedData` は DataPackage をベースに作られるが、DataPackageは生成直後日別に生成されているので、このスクリプトで処理しやすいようにまとめる必要がある。  
+DataPackage を期ごとにまとめるには、以下のようにスクリプトを実行する。
+
+```bash
+$ python scripts/combine_data_packages.py 2021 1
+```
 
 ### CSVの生成
 
@@ -28,3 +37,6 @@ Selected strategy: high_payout
 Processing races: 100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 45499/45499 [11:38<00:00, 65.15it/s]
 Prepared data and log saved in data/prepared/20240622_084705
 ```
+
+生成されたデータ( `PreparedData` )はモデルの訓練でそのまま使える。  
+Vertical DataFrame / Horizontal DataFrame もここで分かれる。
