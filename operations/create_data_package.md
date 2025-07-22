@@ -37,7 +37,7 @@ Do you want to proceed with these terms? (yes/no): yes
 まとめられたファイルは以下のように配置される。
 
 ```
-data/suite/{year}/{period_type}/
+data/data_package_sources/{year}/{period_type}/
   racer_winning_trick.csv
   racer_st.csv
   racer_elative_performance_metrics.csv
@@ -58,13 +58,18 @@ $ PYTHONPATH=.:$PYTHONPATH python scripts/generate_race_data_package.py 2021-11-
 ```
 
 リーク防止のため、これより時系列的に後のデータを含む AggregatedData を使用しないように注意すること[^1]。　　
-`data/suite/{year}/{period_type}/` に `DataPackageSource` を作成した場合は、その直下にある `merge_log.txt` というファイルにどの AggregatedData をマージしたかが記録されている。
+`data/data_package_sources/{year}/{period_type}/` に `DataPackageSource` を作成した場合は、その直下にある `merge_log.txt` というファイルにどの AggregatedData をマージしたかが記録されている。
 
-日別に生成されたCSVは、以下のユーティリティスクリプトの実行により期別に統合が行える。
+## DataPackage の特徴
 
-```bash
-$ PYTHONPATH=.:$PYTHONPATH python scripts/combine_data_packages.py 2021 2                    
-Combined data saved to data/tmp/packages/2021_2.csv
-```
+- 完全に「大は小を兼ねる」という性質を持つ包括的なデータセット
+  - これをベースにモデルに応じた前処理をしたり、目的変数を追加したりして訓練データを作成する
+- 複数の期を横断したデータ集計が必要
+  - AggregatedData は期毎に集計期間が完全に独立しているのに対し、 `DataPackage` は学習に必要なボリュームを担保するため、極力過去のデータを多く利用するようになっている
+-  データリーク要注意
+  - あるレースを対象とした DataPackage を作るときに利用できるデータは AggregatedData はレースの日付を基準に前期から n期 でなければならない
+  - 例えば、2024年4月30日は2024年後期であるため、2024年前期以前のデータしか使ってはいけない
+  - 今期のデータも含めてはいけないことに注意
+    - なぜなら、本番運用する際にそのレースの期の統計情報は時系列的に存在しないため
 
 [^1]: 例えば、2023年後期の期初から1ヶ月分のデータを作るなら `python scripts/generate_race_data_package.py 2023-11-01 2023-11-30` のようなコマンドになるが、算入する AggregatedData に2023年後期以降のデータを含んでいたらリークになる
