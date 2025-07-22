@@ -57,7 +57,7 @@ $ ls -l data/aggregation/stadium/
 レーサーの場合も基本的には前項と同様だが、集計対象のデータ種別が4種あるため、第4引数でデータ種別を指定する必要がある。
 
 ```
-$ PYTHONPATH=.:$PYTHONPATH python scripts/aggregate_racer_data_by_period.py --year 2020 --period 2 --periods 1 --type all
+$ PYTHONPATH=.:$PYTHONPATH python scripts/aggregate_racer_data_by_period.py --year 2020 --period 2 --terms 1 --type all
 ```
 
 type に "all" を指定することで全種同時に集計することが可能である。
