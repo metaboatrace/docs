@@ -1,6 +1,7 @@
 ## スキーマの生成
 
-※ 以下、 [Crawlers](https://github.com/metaboatrace/crawlers) リポジトリで作業を行うものとする
+※ 以下、 [Crawlers](https://github.com/metaboatrace/crawlers) リポジトリで作業を行うものとする  
+※ スクリプト実行時に `PYTHONPATH=.:$PYTHONPATH` が省略されている場合は、 `uv pip install -e .` が実行済みであること
 
 OriginDataの永続化はRDBにて行われている。
 
@@ -61,7 +62,17 @@ $ psql -h 127.0.0.1 -p 55432 -U postgres -d metaboatrace_development -f 20200501
 
 一部のデータの欠損は、スクリプトで補完が可能である。
 
-### レーサーの登録期
+### レーサーの追加
+
+`race_entries` テーブルには存在するが `racers` テーブルに存在しないレーサーは以下のスクリプトでクロールできる。  
+
+```bash
+$ python scripts/crawl_missing_racers.py
+```
+
+※ただし、引退したレーサーに関してはデータを収集できない
+
+### レーサーの登録期の更新
 
 公式サイトでは、レーサーが引退すると、プロフィールは閲覧できなくなる。  
 その場合、特徴量として利用する重要なデータが取得することができない。
