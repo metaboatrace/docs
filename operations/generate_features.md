@@ -42,7 +42,14 @@ uv run scripts/generate_daily_feature_datasets.py \
 
 デフォルトでは `outputs/feature_dataset` 配下に以下の構成で出力される。
 
-- `vertical/YYYY/YYYY-MM-DD.parquet`: レーサー単位（Vertical形式）のデータセット
-- `horizontal/YYYY/YYYY-MM-DD.parquet`: レース単位（Horizontal形式）のデータセット
+### Vertical形式（レーサー単位）
+- **ファイルパス**: `outputs/feature_dataset/vertical/YYYY/YYYY-MM-DD.parquet`
+- **構造**: 1行 = 1レーサー（1レースにつき6行）
+- **用途**: レーサー個別の成績予測（着順、連対率など）
 
-生成されたファイルは、モデル訓練スクリプトの入力として使用される。
+### Horizontal形式（レース単位）
+- **ファイルパス**: `outputs/feature_dataset/horizontal/YYYY/YYYY-MM-DD.parquet`
+- **構造**: 1行 = 1レース（6艇分の特徴量を横に結合）
+- **用途**: レース全体の予測（3連単の配当、万舟券確率など）
+
+生成されたファイルは、モデル訓練スクリプト (`train_models.md`) の入力として使用される。
