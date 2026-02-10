@@ -32,6 +32,11 @@
 ### データセットの生成
 
 - [OriginData の収集](./operations/crawl_origin_data.md)
+- [FeatureDataset の生成](./operations/generate_features.md)
+
+### モデルの訓練と評価
+
+- [モデルの訓練](./operations/train_models.md)
 
 
 ## Tips
