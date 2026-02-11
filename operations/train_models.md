@@ -1,44 +1,50 @@
 # モデルの訓練
 
- `generate_daily_feature_datasets.py` で生成した `FeatureDataset` を使用して、競艇予測モデルを訓練する手順です。
-`ml` リポジトリの以下のスクリプトを使用します。
-
-## 概要
-
-モデルの訓練には、主に以下の2つのアプローチがあります。
-
-1.  **ホールドアウト検証 (`train_model_holdout.py`)**: 全データのうち最後の1年をテストデータとして評価する方法。
-2.  **時系列交差検証 (`train_model_cv.py`)**: Expanding Window などの手法を用いて、時系列データに適した交差検証を行う方法。
-
-これらのスクリプトは対話モード（Interactive Mode）をサポートしており、引数を指定せずに実行すると、学習対象やパラメータを順次選択できます。
+※ 以下、 [ML](https://github.com/metaboatrace/ml) リポジトリで作業を行うものとする  
+※ スクリプト実行時に `PYTHONPATH=.:$PYTHONPATH` が省略されている場合は、 `uv pip install -e .` が実行済みであること
 
 ## 前提条件
 
-- `ml` リポジトリのセットアップと、`FeatureDataset` の生成が完了していること。
+- `FeatureDataset` を生成済みであること
 
-## 1. ホールドアウト検証による訓練
+## 概要
 
-基本的なモデルの性能確認や、最終的なモデル構築に使用します。
+モデルの訓練には、2つのアプローチが存在する
 
-### 実行手順
+| 手法 | スクリプト | 概要 |
+| --- | --- | --- |
+| **ホールドアウト検証** | `train_model_holdout.py` | 全データのうち最後の1年をテストデータとして評価する方法 |
+| **時系列交差検証** | `train_model_cv.py` | Expanding Window などの手法を用いて、時系列データに適した交差検証を行う方法 |
+
+これらのスクリプトは対話モード（Interactive Mode）をサポートしているため、引数を指定せずに実行すると、学習対象やパラメータを順次選択可能
+
+## 実行例
+
+### ホールドアウト検証による訓練
+
+#### 用途
+
+- 基本的なモデルの性能確認
+- 最終的なモデル構築
+
+#### 実行手順
 
 ```bash
-cd ml
 uv run scripts/train_model_holdout.py
 ```
 
-コマンドを実行すると、対話形式で以下の設定を求められます。
+引数を指定せずに実行すると、対話形式で以下の設定が可能
 
-- **ターゲット選択**: 予測対象（例: `result_rank`）
-- **データ形式**: Vertical / Horizontal
-- **データファイルの選択**: 生成済みの Parquet ファイル
-- **モデルタイプ**: `lightgbm`, `xgboost` など
-- **訓練モード**: `basic` (高速) / `full` (SMOTE + GridSearchCV)
-- **閾値最適化指標**: `f1`, `precision_focused` など
+| 項目 | 説明 |
+| --- | --- |
+| **ターゲット選択** | 予測対象（例: `result_rank`） |
+| **データ形式** | `vertical` / `horizontal` |
+| **データファイルの選択** | 生成済みの Parquet ファイル |
+| **モデルタイプ** | `lightgbm`, `xgboost` など |
+| **訓練モード** | `basic` (高速) / `full` (SMOTE + GridSearchCV) |
+| **閾値最適化指標** | `f1`, `precision_focused` など |
 
-### コマンドライン引数による実行
-
-対話モードをスキップして引数で直接指定することも可能です。
+対話モードをスキップして引数で直接指定することも可能
 
 ```bash
 uv run scripts/train_model_holdout.py \
@@ -49,18 +55,29 @@ uv run scripts/train_model_holdout.py \
   --output models/my_model.pkl
 ```
 
-## 2. 時系列交差検証による訓練
+### 時系列交差検証による訓練
 
-モデルの汎化性能をより厳密に評価するために使用します。
+#### 用途
 
-### 実行手順
+- モデルの汎化性能に対する厳密的な評価
+
+#### 実行手順
 
 ```bash
 cd ml
 uv run scripts/train_model_cv.py
 ```
 
-### コマンドライン引数による実行例
+引数を指定せずに実行すると、対話形式で以下の設定が可能
+
+| 項目 | 説明 |
+| --- | --- |
+| **ターゲット選択** | 予測対象（例: `result_rank`） |
+| **モデルタイプ** | `lightgbm`, `xgboost` など |
+| **訓練モード** | `basic` (高速) / `full` (SMOTE + GridSearchCV) |
+| **閾値最適化指標** | `f1`, `precision_focused` など |
+
+対話モードをスキップして引数で直接指定することも可能
 
 ```bash
 uv run scripts/train_model_cv.py \
@@ -68,12 +85,13 @@ uv run scripts/train_model_cv.py \
   --model xgboost \
   --years 2020 2021 2022 \
   --cv-strategy expanding \
-  --output models/cv_result.json
+  --output models/cv_result.json \
+  --input "outputs/feature_dataset"
 ```
 
 ## 出力
 
-訓練が完了すると、以下の成果物が生成されます（スクリプトやオプションによる）。
+訓練が完了すると、以下の成果物が生成される（スクリプトやオプションによる）
 
 - **モデルファイル (`.pkl`)**: 学習済みモデル
 - **メタデータ (`.json`)**: 学習時のパラメータや評価指標
@@ -81,5 +99,5 @@ uv run scripts/train_model_cv.py \
 
 ## 注意事項
 
-- ranker系のモデル（`lightgbm_ranker` など）を使用する場合は、データ形式として `vertical` を選択する必要があります。
-- `full` モードは計算コストが高いため、大規模なデータセットで使用する場合は時間がかかることがあります。
+- ranker系のモデル（`lightgbm_ranker` など）を使用する場合は、データ形式として `vertical` を選択する必要がある
+- `full` モードは計算コストが高いため、大規模なデータセットで使用する場合は時間がかかることがある
