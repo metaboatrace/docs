@@ -16,7 +16,8 @@
 | **ホールドアウト検証** | `train_model_holdout.py` | 全データのうち最後の1年をテストデータとして評価する方法 |
 | **時系列交差検証** | `train_model_cv.py` | Expanding Window などの手法を用いて、時系列データに適した交差検証を行う方法 |
 
-これらのスクリプトは対話モード（Interactive Mode）をサポートしているため、引数を指定せずに実行すると、学習対象やパラメータを順次選択可能
+これらのスクリプトは**対話モード（Interactive Mode）のみ**をサポートしている。
+実行すると、学習対象やパラメータを順次選択するプロンプトが表示される。
 
 ## 実行例
 
@@ -33,27 +34,7 @@
 uv run scripts/train_model_holdout.py
 ```
 
-引数を指定せずに実行すると、対話形式で以下の設定が可能
-
-| 項目 | 説明 |
-| --- | --- |
-| **ターゲット選択** | 予測対象（例: `result_rank`） |
-| **データ形式** | `vertical` / `horizontal` |
-| **データファイルの選択** | 生成済みの Parquet ファイル |
-| **モデルタイプ** | `lightgbm`, `xgboost` など |
-| **訓練モード** | `basic` (高速) / `full` (SMOTE + GridSearchCV) |
-| **閾値最適化指標** | `f1`, `precision_focused` など |
-
-対話モードをスキップして引数で直接指定することも可能
-
-```bash
-uv run scripts/train_model_holdout.py \
-  --target result_rank \
-  --model lightgbm \
-  --mode basic \
-  --balance-ratio 1.0 \
-  --output models/my_model.pkl
-```
+実行後、ターゲット、データ形式、モデルタイプ、訓練モードなどを対話形式で選択する。
 
 ### 時系列交差検証による訓練
 
@@ -64,31 +45,10 @@ uv run scripts/train_model_holdout.py \
 #### 実行手順
 
 ```bash
-cd ml
 uv run scripts/train_model_cv.py
 ```
 
-引数を指定せずに実行すると、対話形式で以下の設定が可能
-
-| 項目 | 説明 |
-| --- | --- |
-| **ターゲット選択** | 予測対象（例: `result_rank`） |
-| **モデルタイプ** | `lightgbm`, `xgboost` など |
-| **訓練モード** | `basic` (高速) / `full` (SMOTE + GridSearchCV) |
-| **閾値最適化指標** | `f1`, `precision_focused` など |
-
-対話モードをスキップして引数で直接指定することも可能
-
-```bash
-uv run scripts/train_model_cv.py \
-  --target result_rank \
-  --model xgboost \
-  --years 2020 2021 2022 \
-  --cv-strategy expanding \
-  --output models/cv_result.json \
-  --input "outputs/feature_dataset"
-```
-
+実行後、ターゲット、使用する年、CV戦略（Expanding Window等）などを対話形式で選択する。
 ## 出力
 
 訓練が完了すると、以下の成果物が生成される（スクリプトやオプションによる）
