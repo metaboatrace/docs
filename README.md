@@ -38,6 +38,9 @@
 
 - [モデルの訓練](./operations/train_models.md)
 
+## 開発標準
+
+- [開発標準](./standards/README.md)
 
 ## Tips
 
