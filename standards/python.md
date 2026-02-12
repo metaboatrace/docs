@@ -39,16 +39,3 @@
 
 - `[dependency-groups]` 形式（[PEP 735](https://peps.python.org/pep-0735/)）で定義する
 - `[project.optional-dependencies]` は使用しない
-
----
-
-### 現状の各リポジトリとのギャップ
-
-全リポジトリが上記の標準に準拠済み。
-
-| リポジトリ | 種類 | 状態 |
-| --- | --- | --- |
-| models | ライブラリ (PyPI) | ✅ 準拠済み |
-| scrapers | ライブラリ (PyPI) | ✅ 準拠済み（mypy の一部除外あり: スクレイピング処理） |
-| crawlers | サービス | ✅ 準拠済み |
-| ml | サービス | ✅ 準拠済み |
