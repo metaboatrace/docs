@@ -38,6 +38,10 @@
 
 - [モデルの訓練](./operations/train_models.md)
 
+### シミュレーション
+
+- [投票シミュレーション（バックテスト）](./operations/simulate_betting.md)
+
 
 ## Tips
 
