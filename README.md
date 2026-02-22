@@ -42,6 +42,9 @@
 
 - [投票シミュレーション（バックテスト）](./operations/simulate_betting.md)
 
+## 開発標準
+
+- [開発標準](./standards/README.md)
 
 ## Tips
 
