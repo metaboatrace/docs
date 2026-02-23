@@ -16,7 +16,8 @@
 | [engineering-standards](https://github.com/metaboatrace/engineering-standards) | 組織全体のエンジニアリング標準と共通設定ファイルを管理するリポジトリ |
 
 ※ サービスは頭文字を大文字で表記  
-※ 各リポジトリのREADMEにはローカル開発環境の構築方法を記載し、それ以上の詳細はこのリポジトリで管理
+※ 各リポジトリのREADMEにはローカル開発環境の構築方法を記載し、それ以上の詳細はこのリポジトリで管理  
+※ 開発標準は [engineering-standards](https://github.com/metaboatrace/engineering-standards) に集約し、このリポジトリではビジネスの次元(ブラックボックス視点)での文書化のみ行う
 
 ## 用語定義
 
@@ -42,10 +43,6 @@
 ### シミュレーション
 
 - [投票シミュレーション（バックテスト）](./operations/simulate_betting.md)
-
-## 開発標準
-
-- [開発標準](./standards/README.md)
 
 ## Tips
 
