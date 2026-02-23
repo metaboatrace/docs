@@ -43,7 +43,3 @@
 ### シミュレーション
 
 - [投票シミュレーション（バックテスト）](./operations/simulate_betting.md)
-
-## Tips
-
-- [ECSコンテナにアクセスする](./guides/ecs-exec.md)
