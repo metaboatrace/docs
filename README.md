@@ -31,15 +31,22 @@
 
 ## 運用
 
+### OriginDataの収集
+
+- [Crawlers](https://github.com/metaboatrace/crawlers) にて
+  - [公式サイトのクローリング](https://github.com/metaboatrace/crawlers/blob/main/docs/crawl_origin_data.md) を実行
+
 ### データセットの生成
 
-- [OriginData の収集](./operations/crawl_origin_data.md)
-- [FeatureDataset の生成](./operations/generate_features.md)
+- [ML](https://github.com/metaboatrace/ml) にて
+  - [FeatureDataset の生成](https://github.com/metaboatrace/ml/blob/main/docs/generate_feature_datasets.md) を実行
 
 ### モデルの訓練と評価
 
-- [モデルの訓練](./operations/train_models.md)
+- [ML](https://github.com/metaboatrace/ml) にて
+  - [モデルの訓練](https://github.com/metaboatrace/ml/blob/main/docs/train_model.md) を実行
 
 ### シミュレーション
 
-- [投票シミュレーション（バックテスト）](./operations/simulate_betting.md)
+- [ML](https://github.com/metaboatrace/ml) にて
+  - [投票シミュレーション（バックテスト）](https://github.com/metaboatrace/ml/blob/main/docs/simulate_betting.md)
