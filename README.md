@@ -39,16 +39,14 @@
 ### データセットの生成
 
 - [ML](https://github.com/metaboatrace/ml) にて
-  - [FeatureDataset の生成](./operations/generate_features.md) を実行
+  - [FeatureDataset の生成](https://github.com/metaboatrace/ml/blob/main/docs/generate_feature_datasets.md) を実行
 
 ### モデルの訓練と評価
 
-- [モデルの訓練](./operations/train_models.md)
+- [ML](https://github.com/metaboatrace/ml) にて
+  - [モデルの訓練](https://github.com/metaboatrace/ml/blob/main/docs/train_model.md) を実行
 
 ### シミュレーション
 
-- [投票シミュレーション（バックテスト）](./operations/simulate_betting.md)
-
-## Tips
-
-- [ECSコンテナにアクセスする](./guides/ecs-exec.md)
+- [ML](https://github.com/metaboatrace/ml) にて
+  - [投票シミュレーション（バックテスト）](https://github.com/metaboatrace/ml/blob/main/docs/simulate_betting.md)
