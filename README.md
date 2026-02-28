@@ -31,10 +31,15 @@
 
 ## 運用
 
+### OriginDataの収集
+
+- [Crawlers](https://github.com/metaboatrace/crawlers) にて
+  - [公式サイトのクローリング](https://github.com/metaboatrace/crawlers/blob/main/docs/crawl_origin_data.md) を実行
+
 ### データセットの生成
 
-- [OriginData の収集](./operations/crawl_origin_data.md)
-- [FeatureDataset の生成](./operations/generate_features.md)
+- [ML](https://github.com/metaboatrace/ml) にて
+  - [FeatureDataset の生成](./operations/generate_features.md) を実行
 
 ### モデルの訓練と評価
 
